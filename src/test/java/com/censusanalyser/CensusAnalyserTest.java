@@ -1,8 +1,11 @@
 package com.censusanalyser;
 
 
-import org.junit.Assert;
-import org.junit.Test;
+
+
+
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.junit.rules.ExpectedException;
 
 public class CensusAnalyserTest {
@@ -19,7 +22,7 @@ public class CensusAnalyserTest {
         try {
             CensusAnalyser censusAnalyser = new CensusAnalyser();
             int numOfRecords = censusAnalyser.loadIndiaCensusData(INDIA_CENSUS_CSV_FILE_PATH);
-            Assert.assertEquals(29,numOfRecords);
+            Assertions.assertEquals(29,numOfRecords);
         } catch (CensusAnalyserException e) { }
     }
 
@@ -34,7 +37,7 @@ public class CensusAnalyserTest {
             exceptionRule.expect(CensusAnalyserException.class);
             censusAnalyser.loadIndiaCensusData(WRONG_CSV_FILE_PATH);
         } catch (CensusAnalyserException e) {
-            Assert.assertEquals(CensusAnalyserException.ExceptionType.CENSUS_FILE_PROBLEM,e.type);
+            Assertions.assertEquals(CensusAnalyserException.ExceptionType.CENSUS_FILE_PROBLEM,e.type);
         }
     }
 
@@ -49,7 +52,7 @@ public class CensusAnalyserTest {
             exceptionRule.expect(CensusAnalyserException.class);
             censusAnalyser.loadIndiaCensusData(INDIA_CENSUS_CSV_INCORRECT_TYPE);
         } catch (CensusAnalyserException e) {
-            Assert.assertEquals("Incorrect File Type",CensusAnalyserException.ExceptionType.CENSUS_FILE_PROBLEM,e.type);
+            Assertions.assertEquals(CensusAnalyserException.ExceptionType.CENSUS_FILE_PROBLEM, e.type, "Incorrect File Type");
         }
     }
 
@@ -64,7 +67,7 @@ public class CensusAnalyserTest {
             exceptionRule.expect(CensusAnalyserException.class);
             censusAnalyser.loadIndiaCensusData(INDIA_CENSUS_CSV_INCORRECT_DELIMITER);
         } catch (CensusAnalyserException e) {
-            Assert.assertEquals("Incorrect Delimiter",CensusAnalyserException.ExceptionType.CENSUS_FILE_PROBLEM,e.type);
+            Assertions.assertEquals(CensusAnalyserException.ExceptionType.CENSUS_FILE_PROBLEM, e.type, "Incorrect Delimiter");
         }
     }
 
@@ -79,7 +82,7 @@ public class CensusAnalyserTest {
             exceptionRule.expect(CensusAnalyserException.class);
             censusAnalyser.loadIndiaCensusData(WRONG_HEADER_CSV_FILE_PATH);
         } catch (CensusAnalyserException e) {
-            Assert.assertEquals(CensusAnalyserException.ExceptionType.CENSUS_FILE_PROBLEM, e.type);
+            Assertions.assertEquals(CensusAnalyserException.ExceptionType.CENSUS_FILE_PROBLEM, e.type);
         }
     }
 }
